@@ -75,16 +75,10 @@ brew install gh
 Claude Code is Anthropic's CLI tool for working with Claude directly in your terminal.
 
 ```sh
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-> **Don't have npm?** Install Node.js first:
->
-> ```sh
-> brew install node
-> ```
->
-> Then re-run the Claude Code install command above.
+This installs the `claude` command and automatically keeps it up to date in the background.
 
 Verify it worked:
 
