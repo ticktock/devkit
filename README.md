@@ -145,13 +145,112 @@ You should see "Logged in to github.com".
 
 > **What just happened?** Claude Code stored an auth token on your machine so you won't need to log in again. If you ever need to re-authenticate, run `claude` and it will prompt you.
 
-## You're Done
+## What's Next
 
-Your Mac is now set up for development with Claude Code. To start working in a project:
+Your Mac is set up. Here's how to actually start building things.
 
-```sh
-cd /path/to/your/project
-claude
+### Start a Project
+
+The typical way to start a new project is to create a GitHub repo and clone it to your machine:
+
+1. Go to [github.com/new](https://github.com/new) and create a new repository (check "Add a README file" to make it non-empty)
+2. Clone it to your machine:
+
+   ```sh
+   gh repo clone your-username/your-repo-name
+   cd your-repo-name
+   ```
+
+3. Start Claude Code:
+
+   ```sh
+   claude
+   ```
+
+You're now in an interactive session where you can talk to Claude about your project.
+
+### Working with Claude Code
+
+Claude Code works best when you tell it what you want in plain language. Here are some things you can ask it to do:
+
+**Build something:**
+
+```
+create a simple web app that shows a todo list
 ```
 
-Claude Code will help you from there.
+**Work on a branch** (good practice — keeps your main branch clean):
+
+```
+create a new branch called add-login-page, then build a login page
+```
+
+**Commit and push your work:**
+
+```
+commit my changes with a descriptive message and push to github
+```
+
+**Open a pull request** (how you propose changes for review):
+
+```
+create a pull request for this branch
+```
+
+**Fix something:**
+
+```
+the app crashes when I click submit — here's the error: <paste error>
+```
+
+You don't need to memorize commands. Just describe what you want and Claude will figure out the right git, shell, and code changes to make.
+
+### Docker Basics
+
+Make sure Docker Desktop is running (open it from your Applications folder). You can verify it's working:
+
+```sh
+docker info
+```
+
+Log in to Docker Hub from the terminal:
+
+```sh
+docker login
+```
+
+Enter the username and password from the Docker Hub account you created earlier.
+
+**Run a database** — this is one of the most common things you'll use Docker for. For example, to start a PostgreSQL database:
+
+```sh
+docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres
+```
+
+This runs Postgres in the background, accessible on `localhost:5432`. To stop it:
+
+```sh
+docker stop my-postgres
+```
+
+To start it again later:
+
+```sh
+docker start my-postgres
+```
+
+**Docker Compose** — when your project needs multiple services (a database, a web server, a cache, etc.), Docker Compose lets you define them all in a `docker-compose.yml` file and start everything with one command:
+
+```sh
+docker compose up
+```
+
+You can ask Claude Code to help you write a `docker-compose.yml` for your project.
+
+### Further Learning
+
+- [Claude Code documentation](https://code.claude.com/docs/en/overview) — the full guide to everything Claude Code can do
+- [GitHub quickstart](https://docs.github.com/en/get-started/quickstart) — learn the basics of git and GitHub
+- [Docker getting started](https://docs.docker.com/get-started/) — containers, images, and Compose
+- [Homebrew documentation](https://docs.brew.sh) — installing and managing software on macOS
+- [Ghostty documentation](https://ghostty.org/docs) — configuring your terminal
