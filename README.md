@@ -86,6 +86,18 @@ Verify it worked:
 claude --version
 ```
 
+### Optional: Claude Code Desktop App
+
+If you prefer a standalone app over the terminal, Claude Code also has a desktop app with a visual interface for reviewing diffs, running multiple sessions side by side, and scheduling recurring tasks.
+
+Download it here:
+
+- [macOS (Intel and Apple Silicon)](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect)
+
+Open the `.dmg`, drag Claude to your Applications folder, and launch it. Sign in with your Anthropic account (see Step 4 below) and click the **Code** tab to start coding.
+
+> The desktop app and the terminal CLI share the same settings, memory, and configuration — you can use both interchangeably.
+
 ## Step 4: Create Accounts
 
 You'll need accounts on three services. Sign up for each one:
