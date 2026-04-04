@@ -8,9 +8,31 @@ A straightforward guide to getting your Mac ready for development with Claude Co
 - Admin access to your machine
 - A working internet connection
 
-## Step 0: Open Terminal
+## Step 1: Create Your Accounts
 
-Every step in this guide happens in the terminal — a text-based interface for running commands on your Mac. You already have one installed.
+Before installing anything, sign up for the three services you'll use. This is all browser work — no terminal needed yet.
+
+### GitHub
+
+Go to [github.com](https://github.com) and create an account. GitHub is where your code lives and where you collaborate with others.
+
+> **Stuck somewhere in this guide?** Once you have a GitHub account, you can [open an issue on this repo](https://github.com/ticktock/devkit/issues/new) describing where you got stuck, and someone will help.
+
+### Docker Hub
+
+Go to [hub.docker.com](https://hub.docker.com) and create an account. Docker Hub is where you'll pull pre-built container images (like databases) from.
+
+### Anthropic (Claude)
+
+Go to [console.anthropic.com](https://console.anthropic.com) and create an account. This is the account you'll use to sign in to Claude Code.
+
+---
+
+Keep the usernames and passwords for these three accounts handy — you'll need them in Step 6.
+
+## Step 2: Open Terminal
+
+Every step from here on happens in the terminal — a text-based interface for running commands on your Mac. You already have one installed.
 
 To open it:
 
@@ -20,9 +42,9 @@ To open it:
 
 You'll see a window with a blinking cursor — that's where you'll paste the commands from this guide. You can also find Terminal in **Applications > Utilities > Terminal**.
 
-> After Step 2 you'll have Ghostty, a nicer terminal app. You can switch to that once it's installed.
+> After Step 4 you'll have Ghostty, a nicer terminal app. You can switch to that once it's installed.
 
-## Step 1: Install Homebrew
+## Step 3: Install Homebrew
 
 Homebrew is a package manager for macOS — it lets you install software from the terminal.
 
@@ -40,7 +62,7 @@ Verify it worked:
 brew --version
 ```
 
-## Step 2: Install Apps with Homebrew
+## Step 4: Install Apps with Homebrew
 
 ### Ghostty (Terminal Emulator)
 
@@ -70,7 +92,7 @@ The GitHub CLI (`gh`) lets you work with GitHub from the terminal — cloning re
 brew install gh
 ```
 
-## Step 3: Install Claude Code
+## Step 5: Install Claude Code
 
 Claude Code is Anthropic's CLI tool for working with Claude directly in your terminal.
 
@@ -94,28 +116,29 @@ Download it here:
 
 - [macOS (Intel and Apple Silicon)](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect)
 
-Open the `.dmg`, drag Claude to your Applications folder, and launch it. Sign in with your Anthropic account (see Step 4 below) and click the **Code** tab to start coding.
+Open the `.dmg`, drag Claude to your Applications folder, and launch it. Sign in with your Anthropic account and click the **Code** tab to start coding.
 
 > The desktop app and the terminal CLI share the same settings, memory, and configuration — you can use both interchangeably.
 
-## Step 4: Create Accounts
+## Step 6: Sign In
 
-You'll need accounts on three services. Sign up for each one:
+Now connect each CLI tool to the accounts you created in Step 1.
 
-### GitHub
+### GitHub CLI
 
-1. Go to [github.com](https://github.com) and create an account
-2. Back in your terminal, log in with the GitHub CLI:
+Log in with the GitHub CLI:
 
-   ```sh
-   gh auth login
-   ```
+```sh
+gh auth login
+```
 
-3. It will ask you a series of questions. Choose these options:
-   - **Where do you use GitHub?** → `GitHub.com`
-   - **What is your preferred protocol for Git operations?** → `HTTPS`
-   - **How would you like to authenticate GitHub CLI?** → `Login with a web browser`
-4. It will give you a one-time code and open your browser. Paste the code, authorize the app, and you're done.
+It will ask you a series of questions. Choose these options:
+
+- **Where do you use GitHub?** → `GitHub.com`
+- **What is your preferred protocol for Git operations?** → `HTTPS`
+- **How would you like to authenticate GitHub CLI?** → `Login with a web browser`
+
+It will give you a one-time code and open your browser. Paste the code, authorize the app, and you're done.
 
 Verify it worked:
 
@@ -127,21 +150,21 @@ You should see "Logged in to github.com".
 
 ### Docker Hub
 
-1. Go to [hub.docker.com](https://hub.docker.com) and create an account
-2. Open Docker Desktop and sign in with your new account
+Open Docker Desktop and sign in with your Docker Hub account. You can also log in from the terminal:
+
+```sh
+docker login
+```
 
 ### Anthropic (Claude)
 
-1. Go to [console.anthropic.com](https://console.anthropic.com) and create an account
-2. Launch Claude Code for the first time:
+Launch Claude Code for the first time:
 
-   ```sh
-   claude
-   ```
+```sh
+claude
+```
 
-3. Claude Code will open your browser and ask you to log in to your Anthropic account
-4. Once you authorize it, the terminal will confirm you're authenticated and drop you into an interactive session
-5. Type `/exit` to leave the session for now
+It will open your browser and ask you to log in to your Anthropic account. Once you authorize it, the terminal will confirm you're authenticated and drop you into an interactive session. Type `/exit` to leave the session for now.
 
 > **What just happened?** Claude Code stored an auth token on your machine so you won't need to log in again. If you ever need to re-authenticate, run `claude` and it will prompt you.
 
@@ -212,14 +235,6 @@ Make sure Docker Desktop is running (open it from your Applications folder). You
 ```sh
 docker info
 ```
-
-Log in to Docker Hub from the terminal:
-
-```sh
-docker login
-```
-
-Enter the username and password from the Docker Hub account you created earlier.
 
 **Run a database** — this is one of the most common things you'll use Docker for. For example, to start a PostgreSQL database:
 
