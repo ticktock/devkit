@@ -168,6 +168,56 @@ It will open your browser and ask you to log in to your Anthropic account. Once 
 
 > **What just happened?** Claude Code stored an auth token on your machine so you won't need to log in again. If you ever need to re-authenticate, run `claude` and it will prompt you.
 
+## Step 7: Run Claude Code Safely with Docker Sandboxes (Recommended)
+
+Claude Code is powerful — it can read, write, and delete files, run shell commands, install packages, and modify your system. Most of the time that's exactly what you want. But **if you aren't sure you exactly understand what you're trying to do, do it in a sandbox.** That way, if Claude (or a prompt you paste in) does something unexpected, your actual Mac stays untouched.
+
+**Docker Sandboxes** solve this. They run Claude Code inside an isolated microVM — a disposable copy of a dev environment. Claude can do whatever it wants inside the sandbox, and your real files, settings, and system stay untouched.
+
+> **Requirements:** Apple Silicon Mac (M1/M2/M3/M4). Intel Macs are not supported.
+
+### Install the Sandbox CLI
+
+```sh
+brew install docker/tap/sbx
+```
+
+### Log In and Choose a Network Policy
+
+```sh
+sbx login
+```
+
+This opens your browser to authenticate with Docker. On first login, you'll be asked to pick a default **network policy** — this controls what the sandbox is allowed to connect to on the internet:
+
+- **Open** — all network traffic allowed (least safe)
+- **Balanced** — default deny, but common dev sites (GitHub, npm, PyPI, etc.) are allowed **(recommended)**
+- **Locked Down** — everything blocked unless you explicitly allow it
+
+Pick **Balanced** to start. You can change it later.
+
+### Run Claude Code in a Sandbox
+
+From inside a project directory:
+
+```sh
+cd your-repo-name
+sbx run claude
+```
+
+The first run takes a minute to download the sandbox image. Subsequent runs start in seconds.
+
+You'll land in a familiar Claude Code session — same prompt, same capabilities — except now everything Claude does happens inside the sandbox. When you're done and exit, the sandbox is thrown away.
+
+> **Heads up:** Inside a sandbox, Claude Code runs with `--dangerously-skip-permissions` by default. That flag is *only* safe because the sandbox is throwaway and isolated — never use it outside a sandbox.
+
+### When to use a sandbox vs. running Claude directly
+
+- **Use a sandbox** when trying unfamiliar prompts, experimenting, running agents unattended, or any time you're not 100% sure what Claude is about to do. If in doubt — sandbox it.
+- **Run Claude directly** (just `claude`) when you want it to actually modify files in your real project and you understand the changes you're asking for.
+
+Learn more in the [Docker Sandboxes docs](https://docs.docker.com/ai/sandboxes/).
+
 ## What's Next
 
 Your Mac is set up. Here's how to actually start building things.
@@ -184,7 +234,13 @@ The typical way to start a new project is to create a GitHub repo and clone it t
    cd your-repo-name
    ```
 
-3. Start Claude Code:
+3. Start Claude Code (using a sandbox is recommended — see Step 7):
+
+   ```sh
+   sbx run claude
+   ```
+
+   Or, if you'd rather run Claude directly against your real filesystem:
 
    ```sh
    claude
